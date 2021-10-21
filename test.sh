@@ -3,7 +3,7 @@ set -eou pipefail
 
 GOOS=linux
 
-PROJECT_NAME="react"
+PROJECT_NAME="homepage"
 ALWAYSBUILDSITE=false
 
 # parse cla
