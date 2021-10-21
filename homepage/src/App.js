@@ -8,7 +8,19 @@ import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
 import Paper from '@mui/material/Paper';
 import Zoom from '@mui/material/Zoom';
+import Typography from '@mui/material/Typography';
 
+function handleSpeedDial (e,operation){
+  e.preventDefault();
+  if(operation=="Me"){
+    console.log("me")
+  }else if(operation=="School"){
+    //do something else
+  }else if(operation=="Work"){
+    //do something else
+  }
+  // setOpen(!open);// to close the speed dial, remove this line if not needed.
+};
 
 const actions = [
   { icon: <FaceIcon />, name: 'Me' },
@@ -17,13 +29,34 @@ const actions = [
 ];
 
 const paper = (
-  <Paper sx={{ position: 'relative', left: 30, top: 30, height: 400, width: 500 }} elevation={22}>
-    <Box component="svg" sx={{ width: 100 }}>
-      Lorem Ipsum
-    </Box>
+  <Paper sx={{ position: 'absolute', width: 2/5, height: 2/3, m: 2 }} elevation={22}>
+      <Typography sx={{ m: 1 }} variant="h6" component="div" gutterBottom>
+        Hi, I'm Jack
+      </Typography>
   </Paper>
 );
 
+
+
+const speed_dial = (
+  <SpeedDial
+    ariaLabel="Nav"
+    sx={{ position: 'absolute', bottom: 15, right: 15 }}
+    icon={<SpeedDialIcon />}
+  >
+    {actions.map((action) => (
+      <SpeedDialAction
+        key={action.name}
+        icon={action.icon}
+        tooltipTitle={action.name}
+        onClick={(e) => {
+          handleSpeedDial(e,action.name)
+        }}
+
+      />
+    ))}
+  </SpeedDial>
+)
 
 class Homepage extends React.Component {
 
@@ -31,34 +64,10 @@ class Homepage extends React.Component {
 
   render() {
     return(
-      // <FormControlLabel
-      //   control={<Switch checked={checked} onChange={handleChange} />}
-      //   label="Show"
-      // />
-      //
-      // <Box sx={{ display: 'flex' }}>
-      //   <Zoom in={checked}>{icon}</Zoom>
-      //   <Zoom in={checked} style={{ transitionDelay: checked ? '500ms' : '0ms' }}>
-      //     {icon}
-      //   </Zoom>
-      // </Box>
-      //
-      <Box sx={{}}>
+      <div id="root">
         {paper}
-        <SpeedDial
-          ariaLabel="SpeedDial basic example"
-          sx={{ position: 'absolute', bottom: 15, right: 15 }}
-          icon={<SpeedDialIcon />}
-        >
-          {actions.map((action) => (
-            <SpeedDialAction
-              key={action.name}
-              icon={action.icon}
-              tooltipTitle={action.name}
-            />
-          ))}
-        </SpeedDial>
-      </Box>);
+        {speed_dial}
+      </div> );
   }
 
 }
