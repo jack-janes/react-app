@@ -14,9 +14,9 @@ function handleSpeedDial (e,operation){
   e.preventDefault();
   if(operation=="Me"){
     console.log("me")
-  }else if(operation=="School"){
+  } else if(operation=="School"){
     //do something else
-  }else if(operation=="Work"){
+  } else if(operation=="Work"){
     //do something else
   }
   // setOpen(!open);// to close the speed dial, remove this line if not needed.
@@ -28,45 +28,66 @@ const actions = [
   { icon: <WorkIcon />, name: 'Work' },
 ];
 
-const paper = (
+const me_paper = (
   <Paper sx={{ position: 'absolute', width: 2/5, height: 2/3, m: 2 }} elevation={22}>
-      <Typography sx={{ m: 1 }} variant="h6" component="div" gutterBottom>
-        Hi, I'm Jack
-      </Typography>
+    <Typography sx={{ m: 1 }} variant="h6" component="div" gutterBottom>
+      Hi, I'm Jack
+    </Typography>
   </Paper>
 );
 
+const work_paper = (
+  <Paper sx={{ position: 'absolute', width: 2/5, height: 2/3, m: 2 }} elevation={22}>
+    <Typography sx={{ m: 1 }} variant="h6" component="div" gutterBottom>
+      I work at Nava PBC
+    </Typography>
+  </Paper>
+);
 
-
-const speed_dial = (
-  <SpeedDial
-    ariaLabel="Nav"
-    sx={{ position: 'absolute', bottom: 15, right: 15 }}
-    icon={<SpeedDialIcon />}
-  >
-    {actions.map((action) => (
-      <SpeedDialAction
-        key={action.name}
-        icon={action.icon}
-        tooltipTitle={action.name}
-        onClick={(e) => {
-          handleSpeedDial(e,action.name)
-        }}
-
-      />
-    ))}
-  </SpeedDial>
-)
+const school_paper = (
+  <Paper sx={{ position: 'absolute', width: 2/5, height: 2/3, m: 2 }} elevation={22}>
+    <Typography sx={{ m: 1 }} variant="h6" component="div" gutterBottom>
+      I tutor
+    </Typography>
+  </Paper>
+);
 
 class Homepage extends React.Component {
 
+  constructor() {
+    super();
+    this.state = {mainDisplay: "Me"}
+  }
 
+  _setDisplay = (display) => {
+    this.setState({
+      mainDisplay: display
+    });
+  }
 
   render() {
     return(
       <div id="root">
-        {paper}
-        {speed_dial}
+        { this.state.mainDisplay == "Me" && (me_paper) }
+        { this.state.mainDisplay == "School" && (school_paper) }
+        { this.state.mainDisplay == "Work" && (work_paper) }
+        <SpeedDial
+          ariaLabel="Nav"
+          sx={{ position: 'absolute', bottom: 15, right: 15 }}
+          icon={<SpeedDialIcon />}
+        >
+          {actions.map((action) => (
+            <SpeedDialAction
+              key={action.name}
+              icon={action.icon}
+              tooltipTitle={action.name}
+              onClick={
+                this._setDisplay.bind(null, action.name)
+              }
+
+            />
+          ))}
+        </SpeedDial>
       </div> );
   }
 
