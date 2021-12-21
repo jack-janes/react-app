@@ -1,6 +1,10 @@
-# react-app
+# Personal Homepage
+This is a react app for personal content.
 
-## notes
-be sure to implement some keyboard shortcuts
-avoid drag&drop as an exclusive method of reordering
-
+## Developing
+To get the page up and running locally or in a codespace:
+```
+cd homepage
+npm install
+npm start
+```
