@@ -10,6 +10,20 @@ import Paper from '@mui/material/Paper';
 import Zoom from '@mui/material/Zoom';
 import Typography from '@mui/material/Typography';
 
+
+function checkBrowserFeatures() {
+  // Check fileAPI
+  if (window.File && window.FileReader && window.FileList && window.Blob) {
+    var reader = new FileReader();
+    console.log("good")
+    return true; 
+  } else {
+    console.log("bad")
+    alert('The File APIs are not fully supported by your browser. Fallback required.');
+    return false;
+  }
+}
+
 function handleSpeedDial (e,operation){
   e.preventDefault();
   if(operation=="Me"){
